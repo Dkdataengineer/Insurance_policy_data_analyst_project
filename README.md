@@ -212,7 +212,7 @@ WHERE policy_start_date <= '2026-02-28';
 
 
 # 🚀 Skills Demonstrated
-
+<br><br>
 -   ✔ Data Simulation & Large Dataset Handling
     
 -   ✔ SQL Analytical Queries & Database Design
