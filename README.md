@@ -29,7 +29,7 @@ This project simulates an **auto insurance portfolio** and answers key business 
 -   What is the loss ratio across policies?
     
 -   How do claims vary across months and years?
-
+<br>
 # 🛠 Tech Stack
 ![Power BI Dashboard](Tech_stack.jpg)
 
@@ -44,7 +44,7 @@ The dataset was simulated using **Pandas** and **NumPy** with specific probabili
 -   **2026 Claims:** Only for 4-year policies (10% probability) between Jan 1 – Feb 28.
   
 
-
+<br>
 # 🗄 SQL Data Model
 
 ### Policy Table
@@ -194,7 +194,7 @@ WHERE policy_start_date <= '2026-02-28';
 
 ----------
 
-
+<br<br>
 # 📊 Project Dashboard
 
 ![Power BI Dashboard](powerbi_img.png)
