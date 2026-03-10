@@ -42,6 +42,7 @@ The dataset was simulated using **Pandas** and **NumPy** with specific probabili
 -   **2025 Claims:** Triggered for vehicles purchased on the 7th, 14th, 21st, or 28th (30% probability).
     
 -   **2026 Claims:** Only for 4-year policies (10% probability) between Jan 1 – Feb 28.
+-   
 
 # 🗄 SQL Data Model
 
@@ -80,6 +81,7 @@ CREATE TABLE claims (
 ```
 
 ----------
+
 
 # 📊 Analytical Queries
 
