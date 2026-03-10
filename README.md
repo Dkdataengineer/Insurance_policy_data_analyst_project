@@ -43,47 +43,149 @@ The dataset was simulated using **Pandas** and **NumPy** with specific probabili
     
 -   **2026 Claims:** Only for 4-year policies (10% probability) between Jan 1 – Feb 28.
 
-```
-import pandas as pd
-import numpy as np
+# 🗄 SQL Data Model
 
-# number of customers
-n = 1_000_000
+### Policy Table
 
-# customer ids
-customer_ids = np.arange(1, n+1)
-
-vehicle_ids = np.arange(1, n+1)
-
-vehicle_value = 100000
-
-# purchase dates evenly distributed
-dates = pd.date_range("2024-01-01", "2024-12-31")
-purchase_dates = np.tile(dates, int(np.ceil(n/len(dates))))[:n]
-
-# tenure distribution
-tenure_choices = [1,2,3,4]
-tenure_prob = [0.2,0.3,0.4,0.1]
-
-tenure = np.random.choice(tenure_choices, size=n, p=tenure_prob)
-
-premium = tenure * 100
-
-start_date = purchase_dates + pd.Timedelta(days=365)
-
-end_date = start_date + pd.to_timedelta(tenure*365, unit="D")
-
-df = pd.DataFrame({
-    "Customer_ID":customer_ids,
-    "Vehicle_ID":vehicle_ids,
-    "Vehicle_Value":vehicle_value,
-    "Premium":premium,
-    "Policy_Purchase_Date":purchase_dates,
-    "Policy_Start_Date":start_date,
-    "Policy_End_Date":end_date,
-    "Policy_Tenure":tenure
-})
-
-df.to_csv("policy_sales.csv",index=False)
+SQL
 
 ```
+CREATE TABLE policy_sales (
+    customer_id INT,
+    vehicle_id INT,
+    vehicle_value INT,
+    premium INT,
+    policy_purchase_date DATE,
+    policy_start_date DATE,
+    policy_end_date DATE,
+    policy_tenure INT
+);
+
+```
+
+### Claims Table
+
+SQL
+
+```
+CREATE TABLE claims (
+    claim_id INT,
+    customer_id INT,
+    vehicle_id INT,
+    claim_amount INT,
+    claim_date DATE,
+    claim_type INT
+);
+
+```
+
+----------
+
+# 📊 Analytical Queries
+
+> **Q 1. Calculate the total premium collected during the year 2024.**
+
+SQL
+
+```
+SELECT SUM(premium) AS total_premium
+FROM policy_sales;
+
+```
+
+----------
+
+> **Q 2.  Calculate the total claim cost for each year (2025 and 2026) with a monthly breakdown.**
+
+SQL
+
+```
+SELECT 
+YEAR(claim_date) AS year,
+MONTH(claim_date) AS month,
+SUM(claim_amount) AS total_claim_cost
+FROM claims
+GROUP BY YEAR(claim_date), MONTH(claim_date)
+ORDER BY year, month;
+
+```
+
+----------
+
+> **Q 3. Calculate the claim cost to premium ratio for each policy tenure (1, 2, 3, and 4 years).**
+
+SQL
+
+```
+SELECT
+p.policy_tenure,
+SUM(c.claim_amount) / SUM(p.premium) AS claim_ratio
+FROM policy_sales p
+LEFT JOIN claims c
+ON p.vehicle_id = c.vehicle_id
+GROUP BY p.policy_tenure;
+
+```
+
+----------
+
+> **Q 4. Calculate the claim cost to premium ratio by the month in which the policy was sold  (January
+December 2024).**
+
+SQL
+
+```
+SELECT
+MONTH(policy_purchase_date) AS sale_month,
+SUM(c.claim_amount) / SUM(p.premium) AS ratio
+FROM policy_sales p
+LEFT JOIN claims c
+ON p.vehicle_id = c.vehicle_id
+GROUP BY MONTH(policy_purchase_date);
+
+```
+
+----------
+
+> **Q 5. If every vehicle that has not yet made a claim eventually files exactly one claim during the
+remaining policy tenure, estimate the total potential claim liability.**
+
+SQL
+
+```
+WITH total_vehicles AS (
+    SELECT COUNT(*) AS total FROM policy_sales
+),
+claimed AS (
+    SELECT COUNT(DISTINCT vehicle_id) AS claimed FROM claims
+)
+SELECT 
+    CAST((total - claimed) AS BIGINT) * 10000 AS future_claim_liability
+FROM total_vehicles, claimed;
+
+```
+
+----------
+
+> **Q 6  Calculate the premium already earned by the company up to February 28, 2026.**
+
+SQL
+
+```
+SELECT
+SUM(
+    (premium * 1.0 / DATEDIFF(day, policy_start_date, policy_end_date)) 
+    * 
+    DATEDIFF(day, policy_start_date, 
+        CASE 
+            WHEN policy_end_date < '2026-02-28' THEN policy_end_date 
+            ELSE '2026-02-28' 
+        END
+    )
+) AS earned_premium
+FROM policy_sales
+WHERE policy_start_date <= '2026-02-28';
+
+```
+
+----------
