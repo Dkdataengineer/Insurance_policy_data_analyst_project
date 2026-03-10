@@ -44,6 +44,7 @@ The dataset was simulated using **Pandas** and **NumPy** with specific probabili
 -   **2026 Claims:** Only for 4-year policies (10% probability) between Jan 1 – Feb 28.
   
 
+
 # 🗄 SQL Data Model
 
 ### Policy Table
@@ -81,6 +82,7 @@ CREATE TABLE claims (
 ```
 
 ----------
+
 
 
 # 📊 Analytical Queries
@@ -192,9 +194,11 @@ WHERE policy_start_date <= '2026-02-28';
 
 ----------
 
+
 # 📊 Project Dashboard
 
 ![Power BI Dashboard](powerbi_img.png)
+
 
 
 # 📈 Findings 
@@ -204,3 +208,15 @@ WHERE policy_start_date <= '2026-02-28';
 - 80% of claims are first-time claims, with only a small portion being repeat claims. 
 - Policy distribution is heavily concentrated in 3-year tenures (~40%).
 - The loss ratio of 2.06 indicates claims exceed premium revenue, suggesting potential pricing adjustments may be required.
+
+
+
+# 🚀 Skills Demonstrated
+
+-   ✔ Data Simulation & Large Dataset Handling
+    
+-   ✔ SQL Analytical Queries & Database Design
+    
+-   ✔ Business KPI Design & Risk Analysis
+    
+-   ✔ Advanced Data Visualization (Power BI)
