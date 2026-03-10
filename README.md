@@ -192,6 +192,15 @@ WHERE policy_start_date <= '2026-02-28';
 
 ----------
 
-📊 Project Dashboard
+# 📊 Project Dashboard
 
 ![Power BI Dashboard](powerbi_img.png)
+
+
+# 📈 Findings 
+
+- Claim costs peak in January–February, then stabilize across the year. 2025 accounts for the majority of claim payouts (~₹393M). 
+- 3-year policies generate the highest claim exposure due to the largest customer base. 
+- 80% of claims are first-time claims, with only a small portion being repeat claims. 
+- Policy distribution is heavily concentrated in 3-year tenures (~40%).
+- The loss ratio of 2.06 indicates claims exceed premium revenue, suggesting potential pricing adjustments may be required.
