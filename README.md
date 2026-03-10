@@ -200,7 +200,7 @@ WHERE policy_start_date <= '2026-02-28';
 ![Power BI Dashboard](powerbi_img.png)
 
 
-<br>
+
 # 📈 Findings 
 <br>
 - Claim costs peak in January–February, then stabilize across the year. 2025 accounts for the majority of claim payouts (~₹393M). 
@@ -210,9 +210,9 @@ WHERE policy_start_date <= '2026-02-28';
 - The loss ratio of 2.06 indicates claims exceed premium revenue, suggesting potential pricing adjustments may be required.
 
 
-<br>
+
 # 🚀 Skills Demonstrated
-<br>
+
 -   ✔ Data Simulation & Large Dataset Handling
     
 -   ✔ SQL Analytical Queries & Database Design
