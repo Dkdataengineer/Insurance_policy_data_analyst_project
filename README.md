@@ -29,3 +29,5 @@ This project simulates an **auto insurance portfolio** and answers key business 
 -   What is the loss ratio across policies?
     
 -   How do claims vary across months and years?
+
+# 🛠 Tech Stack
