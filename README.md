@@ -44,7 +44,7 @@ The dataset was simulated using **Pandas** and **NumPy** with specific probabili
 -   **2026 Claims:** Only for 4-year policies (10% probability) between Jan 1 – Feb 28.
   
 
-<br>
+
 # 🗄 SQL Data Model
 
 ### Policy Table
