@@ -194,7 +194,7 @@ WHERE policy_start_date <= '2026-02-28';
 
 ----------
 
-<br<br>
+
 # 📊 Project Dashboard
 
 ![Power BI Dashboard](powerbi_img.png)
