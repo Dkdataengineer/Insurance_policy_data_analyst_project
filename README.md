@@ -31,3 +31,4 @@ This project simulates an **auto insurance portfolio** and answers key business 
 -   How do claims vary across months and years?
 
 # 🛠 Tech Stack
+![Power BI Dashboard](Tech_stack.png)
